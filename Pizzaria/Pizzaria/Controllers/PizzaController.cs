@@ -30,6 +30,12 @@ namespace Pizzaria.Controllers
 			return View(pizza);
 		}
 
+		public async Task<IActionResult> Remover(int id)
+		{
+			var pizza = await _pizzaInterface.RemoverPizza(id);
+			return RedirectToAction("Index", "Pizza");
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> Cadastrar(PizzaCriacaoDto pizzaCriacaoDto, IFormFile foto)
 		{

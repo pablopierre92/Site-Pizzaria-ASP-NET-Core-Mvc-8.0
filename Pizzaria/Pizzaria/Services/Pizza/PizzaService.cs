@@ -111,14 +111,30 @@ namespace Pizzaria.Services.Pizza
 
 				if(nomeCaminhoImagem != "")
 				{
-					pizza.Capa = nomeCaminhoImagem;
+					pizzaBanco.Capa = nomeCaminhoImagem;
 				}
 				else
 				{
-					pizza.Capa = pizza.Capa;
+					pizzaBanco.Capa = pizza.Capa;
 				}
 
 				_context.Update(pizzaBanco);
+				await _context.SaveChangesAsync();
+
+				return pizza;
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+        }
+
+        public async Task<PizzaModel> RemoverPizza(int id)
+        {
+			try
+			{
+				var pizza = await _context.Pizzas.FirstOrDefaultAsync(pizzabanco => pizzabanco.Id == id);
+				_context.Remove(pizza);
 				await _context.SaveChangesAsync();
 
 				return pizza;
