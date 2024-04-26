@@ -144,5 +144,18 @@ namespace Pizzaria.Services.Pizza
 				throw new Exception(ex.Message);
 			}
         }
+
+        public async Task<List<PizzaModel>> GetPizzasFiltro(string? pesquisar)
+        {
+			try
+			{
+				var pizzas = await _context.Pizzas.Where(pizzaBanco => pizzaBanco.Sabor.Contains(pesquisar)).ToListAsync();
+				return pizzas;
+			}
+			catch(Exception ex) 
+			{
+				throw new Exception(ex.Message);
+			}
+        }
     }
 }

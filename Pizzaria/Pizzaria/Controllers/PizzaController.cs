@@ -23,6 +23,12 @@ namespace Pizzaria.Controllers
 			return View();
 		}
 
+		public async Task<IActionResult> Detalhes (int id)
+		{
+			var pizza = await _pizzaInterface.GetPizzaPorId(id);
+			return View(pizza);
+		}
+
 		public async Task<IActionResult> Editar(int id)
 		{
 			var pizza = await _pizzaInterface.GetPizzaPorId(id);
